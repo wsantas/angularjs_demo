@@ -1,0 +1,113 @@
+<div class="page-container">
+    <div class="row page-header">
+        <div class="small-12 medium-4 medium-offset-4 small-offset-0 columns text-center">
+            <h3>Manage Users</h3>
+        </div>
+        <div class="small-12 medium-2 columns text-right">
+            <a ng-click="addUser()" class="button radius expand">Add User</a>
+            <a id="addUser" data-listname="add-user" class="hide right-off-canvas-toggle"></a>
+        </div>
+        <div class="small-12 medium-2 columns text-right">
+            <a data-listname="upload-roster" class="button secondary radius expand right-off-canvas-toggle">Upload Multiple</a>
+        </div>
+    </div>
+    <div class="manage-users-filter row collapse">
+
+    </div>
+    <table class="admin-users row">
+        <thead>
+            <tr>
+                <th ng-click="toggleSortOrder('name')">Name&ensp;<span id="name_chevron" ng-class="{ 'icon-chevron-down': sortOrder == 'ASC' && sortedBy == 'name', 'icon-chevron-up': sortOrder == 'DESC' && sortedBy == 'name'}"/></th>
+                <th ng-click="toggleSortOrder('email')">Email Address&ensp;<span id="email_chevron" ng-class="{ 'icon-chevron-down': sortOrder == 'ASC' && sortedBy == 'email', 'icon-chevron-up': sortOrder == 'DESC' && sortedBy == 'email'}"/></th>
+                <th>Instructor</th>
+                <th>Observer</th>
+                <th>Admin</th>
+                <th>Certified&ensp;<span id="certified_chevron" ng-class=""/></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tr ng-repeat="user in users">
+            <td class="admin-users__name">{{user.lastName}}, {{user.firstName}}</td>
+            <td class="admin-users__email">{{user.email}}</td>
+            <td class="admin-users__status"><span ng-if="checkAuthority(user.authorities, 'Instructor')" class="icon-playground-check center-icon"></span></td>
+            <td class="admin-users__status"><span ng-if="checkAuthority(user.authorities, 'Observer')" class="icon-playground-check center-icon"></span></td>
+            <td class="admin-users__status"><span ng-if="checkAuthority(user.authorities, 'Admin')" class="icon-playground-check center-icon"></span></td>
+            <td class="admin-users__certified"><span ng-show="user.certified" class="icon-certified-alt"></span></td>
+            <td class="admin-users__edit"><a href="" ng-click="editUser(user.id)">edit</a></td>
+        </tr>
+    </table>
+</div>
+<aside class="right-off-canvas-menu add-user">
+    <ng-form name="addUserForm">
+        <div class="admin-add-user">
+        <h3 class="text-center">User Details</h3>
+        <div>
+            <label>First Name</label>
+            <input name="firstName" ng-model="user.firstName" type="text" class="radius" ng-blur="blurFirstName=true" required>
+        </div>
+        <div class="error" ng-show="addUserForm.firstName.$invalid && blurFirstName">
+            Please provide a first name
+        </div>
+        <hr>
+        <div>
+            <label>Last Name</label>
+            <input name="lastName" ng-model="user.lastName" type="text" class="radius" ng-blur="blurLastName=true" required>
+        </div>
+        <div class="error" ng-show="addUserForm.lastName.$invalid && blurLastName">
+            Please provide a last name
+        </div>
+        <hr>
+        <div>
+            <label>Email</label>
+            <input name="email" ng-model="user.email" type="email" class="radius" ng-blur="blurEmail=true" required>
+        </div>
+        <div class="error" ng-show="addUserForm.email.$invalid && blurEmail">
+            Please provide a valid email address
+        </div>
+        <hr>
+        <ul class="selector-list" >
+            <li ng-repeat="authority in authorities"><a ng-class="{selected: selectedAuthorities[authority]}" ng-click="toggleAuthority(authority)" >{{authority}}</a></li>
+        </ul>
+        <div class="error" ng-show="authorityError">
+            Please select a role.
+        </div>
+        <hr ng-show="editUserFlag">
+        <div ng-show="editUserFlag">
+            <label class="plain">
+                <input name="status" type="checkbox" ng-model="user.userInstitutionProfileStatus" ng-true-value="DISABLED" ng-false-value="ACTIVE">&nbsp;Deactivate the user
+            </label>
+        </div>
+        <hr>
+        <div>
+            <label class="plain">
+                <input name="sendEmail" type="checkbox" ng-model="sendEmail">&nbsp;Send account access email to user<br>(Only available for Observer & Admin)
+            </label>
+        </div>
+        <div>
+            <a class="button expand radius" ng-click="createNewUser()" ng-disabled="addUserForm.$invalid">Submit</a>
+            <a class="button expand radius secondary" ng-click="cancelUser()">Cancel</a>
+        </div>
+        </div>
+    </ng-form>
+</aside>
+<aside class="right-off-canvas-menu upload-roster">
+    <form class="admin-upload-roster">
+        <h3 class="text-center">Upload Multiple Users</h3>
+        <div class="admin-upload__dd" ng-controller="UploadUserController" ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="admin-upload__dd">
+            <h3 class="text-center">Drag & drop<br>your files here<br>to upload them<br><span class="icon-cloud-upload"></span></h3>
+            <hr>
+            <p>Your file should be saved as tab delimited .CSV, and the first row should contain the columns:</p>
+            <ul>
+                <li>First Name</li>
+                <li>Last Name</li>
+                <li>Email Address</li>
+            </ul>
+            <p>A template can be downloaded <a href="files/upload_multiple.csv">here</a></p>
+        </div>
+        <div>
+            <div class="button expand radius" onclick ="javascript:document.getElementById('selectFile').click();">Select File to Upload</div>
+            <input type="file" id="selectFile" ng-controller="UploadUserController" ng-file-select="onFileSelect($files)" style='display:none;'/>
+            <a class="button expand radius secondary" ng-click="cancelUser()">Cancel</a>
+        </div>
+    </form>
+</aside><a id="closeMenu" class="close-right-menu"></a>

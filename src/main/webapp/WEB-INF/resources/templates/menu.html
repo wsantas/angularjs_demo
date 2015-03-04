@@ -1,0 +1,28 @@
+<aside class="left-off-canvas-menu">
+    <div class="top-bar">
+        <ul class="title-area">
+            <li class="name">
+                <h1><img src="images/angular.png" width="66"></h1>
+            </li>
+        </ul>
+    </div>
+    <div class="list-wrap logged-in">
+        <p>Logged in as<a href="/app.html#/sign-out" class="right">Logout</a></p>
+        <div class="logged-in__name">{{user.firstName}} {{user.lastName}}<span class="icon-certified-alt" ng-if="user.certified"></span></div>
+        <ul class="off-canvas-list" ng-if="!$parent.registrationFlow">
+            <li><a href="#/manage_users"><span aria-hidden="true" data-icon="y" class="icon"></span><span>Manage Users</span></a></li>
+        </ul>
+    </div>
+    <div class="sidebar__footer">
+    </div>
+</aside>
+<div class="top-bar">
+    <div>
+        <ul class="title-area">
+            <li class="name">
+                <h1><a><img src="images/angular.png" width="44"></a></h1>
+            </li>
+        </ul>
+        <div class="left" ng-show="!registrationFlow"><a id="closeRightMenu" href="" class="close-left-menu menu-icon"><span aria-hidden="true" data-icon="s" class="icon"></span></a></div>
+    </div>
+</div>

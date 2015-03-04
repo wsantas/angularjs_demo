@@ -1,0 +1,4 @@
+# Created by .gitignore support plugin (hsz.mobi)
+.idea
+src/main/java/org/playground/admin/config/SecurityWebApplicationInitializer.java
+playground-admin.iml

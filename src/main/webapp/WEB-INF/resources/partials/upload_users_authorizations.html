@@ -1,0 +1,51 @@
+<div class="page-container">
+    <div class="row page-header">
+        <div class="small-12 medium-12 columns text-center">
+            <h3>Upload Multiple Users</h3>
+            <p>The following users will be added and invitation emails sent those marked as Observers or Admins. Please select at least one role for each user.</p>
+        </div>
+    </div>
+    <div class="admin-info-helper row">
+        <div class="medium-12 columns text-right"><a href="#panel1" class="toggle-panel">User roles and rights assignments<span class="icon-info"></span></a>
+            <div id="panel1" class="panel admin-panel text-left hide">
+                <ul>
+                    <li>Observer: Will only see obsevations they have created</li>
+                    <li>Instructor: Will only see observations they have created, and is included in list of Instructors</li>
+                    <li>Admin: Can see all observations, and is able to add/edit users</li>
+                </ul><a href="#panel1" class="toggle-panel hide">Close<span class="icon-close"></span></a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="medium-12 columns">
+            <table width="100%">
+                <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email Address</th>
+                    <th class="text-center">Observer</th>
+                    <th class="text-center">Instructor</th>
+                    <th class="text-center">Admin</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="user in users">
+                    <td>{{user.firstName}}</td>
+                    <td>{{user.lastName}}</td>
+                    <td>{{user.email}}</td>
+                    <td class="text-center" ng-repeat="authority in authorities">
+                        <input ng-change="toggleAuthority(user,authority)" type="checkbox" ng-model="confirmed">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="error" ng-show="authorityError">
+            Each user must have at least one role.
+        </div>
+    </div>
+    <div class="row">
+        <div class="medium-12 columns text-right"><a href="#/manage_users" class="button secondary radius">Cancel</a>&nbsp;<a ng-click="submitAuthorizations()" href="" class="button radius">Finish</a><span us-spinner="{lines: 11, length: 6, width: 4, radius: 8, left: '40%', top: '67%'}" spinner-key="assign-authorizations-spinner"></span></div>
+    </div>
+</div><a class="close-right-menu"></a>

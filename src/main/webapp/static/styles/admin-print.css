@@ -1,0 +1,82 @@
+/* =========================
+     Print CSS
+   ========================= */
+
+.admin aside,
+.admin .top-bar,
+.admin .button {
+	display: none;
+}
+
+.admin .left-off-canvas-menu,
+.admin .right-off-canvas-menu {
+	-webkit-transform: none !important;
+	transform: none !important;
+	display: none !important;
+}
+
+.admin .off-canvas-wrap {
+	height: auto;
+	overflow: visible;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+}
+
+.admin .inner-wrap,
+.admin .move-right.move-left > .inner-wrap,
+.admin .move-right > .inner-wrap,
+.admin .move-left > .inner-wrap {
+	-webkit-transform: none !important;
+	transform: none !important;
+	height: auto;
+	overflow: visible;
+	padding: 0;
+	margin: 0 !important;
+	width: 100%;
+	transition: 0 !important;
+}
+
+.admin .page-container,
+.admin .move-right .page-container,
+.admin .move-right.move-left .page-container,
+.admin .move-left .page-container {
+	width: 100% !important;
+	padding: 0;
+	margin: 0;
+	height: auto;
+	overflow: visible;
+	transition: 0 !important;
+}
+
+.admin .bar-graph .bar {
+	background: #00bfd1 !important;
+	-webkit-print-color-adjust: exact;
+	border: 1px solid #00bfd1;
+}
+
+.admin .row {
+	margin-left: 0 !important;
+	margin-right: 0;
+	max-width: none !important;
+}
+
+.admin .medium-2,
+.admin .text-right {
+	text-align: left !important;
+	margin-top: 10px;
+}
+
+.inner-wrap,
+.move-right.move-left > .inner-wrap,
+.move-right > .inner-wrap,
+.move-left > .inner-wrap {
+	width: 100%;
+	-webkit-transform: none !important;
+	transform: none !important;
+	height: auto;
+	padding: 0;
+	margin: 0 !important;
+	transition: 0 !important;
+}
+
